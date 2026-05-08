@@ -1,0 +1,29 @@
+aid: apple-music
+url: https://raw.githubusercontent.com/api-evangelist/apple-music/refs/heads/main/apis.yml
+name: Apple Music
+x-type: company
+description: >-
+  Apple Music is Apple's streaming music service. The MusicKit API and Apple Music API give developers access to catalog, library, and playback control.
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Music
+  - Streaming
+  - Apple
+  - MusicKit
+  - API
+created: '2026-05-08'
+modified: '2026-05-08'
+specificationVersion: '0.19'
+apis: []
+common:
+  - type: Website
+    url: https://developer.apple.com/apple-music/
+  - type: Plans
+    url: plans/apple-music-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/apple-music-rate-limits.yml
+  - type: FinOps
+    url: finops/apple-music-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
