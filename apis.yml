@@ -3,21 +3,43 @@ url: https://raw.githubusercontent.com/api-evangelist/apple-music/refs/heads/mai
 name: Apple Music
 x-type: company
 description: >-
-  Apple Music is Apple's streaming music service. The MusicKit API and Apple Music API give developers access to catalog, library, and playback control.
+  Apple Music is Apple's streaming music service. The Apple Music API and MusicKit framework give developers access to the Apple Music catalog, user library, charts, recommendations, search, and playback control. Authentication is via Apple Developer Program JWT tokens; user library access requires a MusicKit Music User Token.
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
   - Music
   - Streaming
   - Apple
   - MusicKit
-  - API
+  - Catalog
+  - Library
 created: '2026-05-08'
 modified: '2026-05-08'
 specificationVersion: '0.19'
-apis: []
+apis:
+  - aid: apple-music:catalog-library
+    name: Apple Music API
+    description: >-
+      REST API for Apple Music: catalog (songs, albums, artists, music videos, playlists, stations), search, charts, recommendations, and the authenticated user's library, playlists, and ratings.
+    humanURL: https://developer.apple.com/documentation/applemusicapi
+    baseURL: https://api.music.apple.com/v1
+    tags:
+      - Catalog
+      - Library
+      - Search
+      - Charts
+      - Recommendations
+    properties:
+      - type: Documentation
+        url: https://developer.apple.com/documentation/applemusicapi
+      - type: Authentication
+        url: https://developer.apple.com/documentation/applemusicapi/getting_keys_and_creating_tokens
+      - type: SDK
+        url: https://developer.apple.com/musickit/
 common:
   - type: Website
     url: https://developer.apple.com/apple-music/
+  - type: DeveloperPortal
+    url: https://developer.apple.com/documentation/applemusicapi
   - type: Plans
     url: plans/apple-music-plans-pricing.yml
   - type: RateLimits

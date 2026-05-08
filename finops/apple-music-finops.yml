@@ -5,20 +5,21 @@ provider: Apple Music
 providerId: apple-music
 created: '2026-05-08'
 modified: '2026-05-08'
-reconciled: false
+reconciled: true
 tags:
 - Music
 - Streaming
 - Apple
 - MusicKit
-- API
 - FinOps
 - Cost Management
 - FOCUS
-description: FOCUS-aligned FinOps placeholder for Apple Music. Pipeline will replace with real billing details.
-notes: Initial scaffold — billing model has not yet been reconciled.
+description: >-
+  FOCUS-aligned FinOps profile for Apple Music. The Apple Music API does not bill per-call. The two cost lines are (1) the annual Apple Developer Program fee and (2) end-user Apple Music subscriptions consumed by app users. Apple does not invoice apps for catalog calls.
+notes: API is free with the Developer Program; consumer subscriptions are billed directly by Apple to end users, not to the app developer.
 sources:
-- https://developer.apple.com/apple-music/
+- https://developer.apple.com/programs/
+- https://developer.apple.com/documentation/applemusicapi
 - https://focus.finops.org/focus-specification/v1-3/
 alignedWith:
   framework: FinOps Foundation Framework
@@ -26,41 +27,46 @@ alignedWith:
   dataSpec: FOCUS
   dataSpecVersion: '1.3'
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
-publisherName: Apple Music
-serviceCategory: Music
+publisherName: Apple Inc.
+serviceCategory: Music Streaming
 billingModel:
-  pricingCategory: To Be Reconciled
-  billingFrequency: Monthly
+  pricingCategory: Subscription
+  billingFrequency: Annual (developer) / Monthly (consumer)
   billingCurrency: USD
   chargeCategories:
-  - Usage
   - Purchase
-  - Adjustment
+  - Subscription
 focusColumns:
   ServiceName: Apple Music
-  ServiceCategory: Music
-  ProviderName: Apple Music
-  PublisherName: Apple Music
-  InvoiceIssuerName: Apple Music
+  ServiceCategory: Music Streaming
+  ProviderName: Apple Inc.
+  PublisherName: Apple Inc.
+  InvoiceIssuerName: Apple Inc.
   BillingCurrency: USD
-  ChargeCategory: Usage
+  ChargeCategory: Purchase
 meters:
-- name: api_usage
-  description: Catch-all meter pending reconciliation.
-  unit: varies
+- name: developer_program_membership
+  description: Annual Apple Developer Program membership.
+  unit: year
   aggregation: sum
   dimensions:
-  - account
-  - resource
+  - team_id
+- name: end_user_subscription
+  description: Apple Music subscription billed directly to the end user.
+  unit: month
+  aggregation: count
+  dimensions:
+  - tier
+  - country
 principles:
 - name: Visibility
-  description: Pull provider invoices or usage exports until a self-serve usage feed is documented.
+  description: Track Apple Developer Program renewals; understand subscriber-mix drives feature availability, not your cost.
 - name: Allocation
-  description: Tag invoice line items to consuming business units in your FinOps store.
+  description: Allocate Developer Program cost to the team owning the MusicKit identifier.
 - name: Optimization
-  description: Levers depend on the provider's billing model; review at renewal once reconciled.
+  description: No call-level optimization needed; cache catalog data and minimize repeated lookups.
 - name: Accountability
-  description: Assign a contract owner to review billing against negotiated terms.
+  description: Single team owns the MusicKit identifier and signing key.
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

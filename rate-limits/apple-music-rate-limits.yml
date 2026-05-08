@@ -11,25 +11,33 @@ tags:
 - Streaming
 - Apple
 - MusicKit
-- API
 - Rate Limiting
 - Quotas
 - Throttling
-description: Placeholder rate-limit artifact for Apple Music. Replace with real limits once researched.
-notes: Initial scaffold — limits have not yet been reconciled.
+description: >-
+  Apple Music API enforces rate limits but Apple does not publish exact thresholds. Limits are applied per developer token (team) and per Music User Token. The API returns HTTP 429 Too Many Requests when limits are exceeded; clients should back off and retry.
+notes: Apple does not publish per-second/per-minute quotas. Plan for adaptive backoff and caching of catalog responses.
 sources:
-- https://developer.apple.com/apple-music/
+- https://developer.apple.com/documentation/applemusicapi
+- https://developer.apple.com/documentation/applemusicapi/handling_requests_and_responses
 responseCodes:
   throttled: 429
 limits:
-- name: Default
-  scope: account
-  metric: varies
+- name: Per developer token
+  scope: application
+  metric: requests
   limit: see provider documentation
-  notes: Pending reconciliation.
+  notes: Apple does not publish exact thresholds; bursty traffic may be throttled.
+- name: Per Music User Token
+  scope: user
+  metric: requests
+  limit: see provider documentation
+  notes: User-library calls are also subject to per-user limits.
 policies:
 - name: Backoff Strategy
-  description: Clients should implement exponential backoff with jitter and honor any Retry-After header.
+  description: On 429, honor any Retry-After hint and apply exponential backoff with jitter.
+- name: Catalog Caching
+  description: Cache catalog responses (songs, albums, artists) to minimize repeat traffic; respect Apple Music caching guidelines.
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

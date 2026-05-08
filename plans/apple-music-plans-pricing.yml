@@ -5,37 +5,55 @@ provider: Apple Music
 providerId: apple-music
 created: '2026-05-08'
 modified: '2026-05-08'
-reconciled: false
+reconciled: true
 tags:
 - Music
 - Streaming
 - Apple
 - MusicKit
-- API
 - Plans
-description: Placeholder plans/pricing artifact for Apple Music. Replace with real published pricing once
-  the pipeline researches the provider's plans page.
-notes: Initial scaffold — plans/pricing have not yet been reconciled.
+description: >-
+  Apple Music API access is tied to the Apple Developer Program ($99/year). There is no per-call fee. End-user access to library/playback features requires an active Apple Music subscription on the user's Apple ID.
+notes: API is free with Apple Developer Program membership; library/playback require an active Apple Music subscription on the user side.
 sources:
-- https://developer.apple.com/apple-music/
+- https://developer.apple.com/programs/
+- https://www.apple.com/apple-music/
 plans:
-- id: apple-music-default
-  name: To Be Reconciled
-  type: enterprise
-  description: Initial scaffold; replace with provider plan tiers once pricing is reconciled.
+- id: apple-developer-program
+  name: Apple Developer Program
+  type: paid
+  description: Required to obtain a MusicKit identifier and sign developer tokens for Apple Music API access.
   entries:
-  - label: API Access
-    name: api_access
+  - label: Developer Membership
+    name: dev_membership
     type: flat
-    metric: varies
+    metric: year
     limit: -1
-    timeFrame: usage
+    timeFrame: yearly
     geo: global
     unit: 1
-    price: see https://developer.apple.com/apple-music/
+    price: 99 USD/year
     userMultiplied: false
   elements:
-  - name: Pending Reconciliation
+  - name: MusicKit identifier
+  - name: Developer token signing key
+- id: apple-music-subscription
+  name: Apple Music Subscription (End-User)
+  type: subscription
+  description: End users require an active Apple Music subscription to use library, playback, and personalized endpoints.
+  entries:
+  - label: Individual / Family / Student / Voice
+    name: tiers
+    type: flat
+    metric: month
+    limit: -1
+    timeFrame: monthly
+    geo: global
+    unit: 1
+    price: see https://www.apple.com/apple-music/
+    userMultiplied: false
+  elements:
+  - name: Multiple consumer tiers
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
