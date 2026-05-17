@@ -1,7 +1,7 @@
 aid: apple-music
 url: https://raw.githubusercontent.com/api-evangelist/apple-music/refs/heads/main/apis.yml
 name: Apple Music
-x-type: company
+kind: company
 description: >-
   Apple Music is Apple's streaming music service. The Apple Music API and MusicKit framework give developers access to the Apple Music catalog, user library, charts, recommendations, search, and playback control. Authentication is via Apple Developer Program JWT tokens; user library access requires a MusicKit Music User Token.
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
