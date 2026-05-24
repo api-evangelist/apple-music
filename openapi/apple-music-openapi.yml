@@ -1,0 +1,308 @@
+openapi: 3.1.0
+info:
+  title: Apple Music API
+  version: "1.0"
+  description: |
+    REST API for the Apple Music catalog and the authenticated user's library.
+    Catalog endpoints (songs, albums, artists, music videos, playlists,
+    stations, search, charts) require an Apple Developer JWT in the
+    Authorization header. User-library endpoints additionally require a
+    Music User Token in the Music-User-Token header.
+  contact:
+    name: Apple Developer Documentation
+    url: https://developer.apple.com/documentation/applemusicapi
+servers:
+  - url: https://api.music.apple.com/v1
+    description: Apple Music API v1
+tags:
+  - name: Catalog
+    description: Apple Music catalog resources
+  - name: Search
+  - name: Charts
+  - name: Library
+    description: Authenticated user library resources
+  - name: Storefronts
+paths:
+  /catalog/{storefront}/songs/{id}:
+    get:
+      tags: [Catalog]
+      summary: Get a catalog song by id
+      parameters:
+        - $ref: '#/components/parameters/Storefront'
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200': { description: OK }
+  /catalog/{storefront}/songs:
+    get:
+      tags: [Catalog]
+      summary: Get catalog songs by ids
+      parameters:
+        - $ref: '#/components/parameters/Storefront'
+        - $ref: '#/components/parameters/Ids'
+      responses:
+        '200': { description: OK }
+  /catalog/{storefront}/albums/{id}:
+    get:
+      tags: [Catalog]
+      summary: Get a catalog album by id
+      parameters:
+        - $ref: '#/components/parameters/Storefront'
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200': { description: OK }
+  /catalog/{storefront}/albums:
+    get:
+      tags: [Catalog]
+      summary: Get catalog albums by ids
+      parameters:
+        - $ref: '#/components/parameters/Storefront'
+        - $ref: '#/components/parameters/Ids'
+      responses:
+        '200': { description: OK }
+  /catalog/{storefront}/artists/{id}:
+    get:
+      tags: [Catalog]
+      summary: Get a catalog artist by id
+      parameters:
+        - $ref: '#/components/parameters/Storefront'
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200': { description: OK }
+  /catalog/{storefront}/artists:
+    get:
+      tags: [Catalog]
+      summary: Get catalog artists by ids
+      parameters:
+        - $ref: '#/components/parameters/Storefront'
+        - $ref: '#/components/parameters/Ids'
+      responses:
+        '200': { description: OK }
+  /catalog/{storefront}/playlists/{id}:
+    get:
+      tags: [Catalog]
+      summary: Get a catalog playlist by id
+      parameters:
+        - $ref: '#/components/parameters/Storefront'
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200': { description: OK }
+  /catalog/{storefront}/playlists:
+    get:
+      tags: [Catalog]
+      summary: Get catalog playlists by ids
+      parameters:
+        - $ref: '#/components/parameters/Storefront'
+        - $ref: '#/components/parameters/Ids'
+      responses:
+        '200': { description: OK }
+  /catalog/{storefront}/music-videos/{id}:
+    get:
+      tags: [Catalog]
+      summary: Get a catalog music video by id
+      parameters:
+        - $ref: '#/components/parameters/Storefront'
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200': { description: OK }
+  /catalog/{storefront}/stations/{id}:
+    get:
+      tags: [Catalog]
+      summary: Get a catalog station by id
+      parameters:
+        - $ref: '#/components/parameters/Storefront'
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200': { description: OK }
+  /catalog/{storefront}/search:
+    get:
+      tags: [Search]
+      summary: Search the catalog
+      parameters:
+        - $ref: '#/components/parameters/Storefront'
+        - name: term
+          in: query
+          required: true
+          schema: { type: string }
+        - name: types
+          in: query
+          description: Comma-separated list of resource types (e.g. songs,albums,artists,playlists)
+          schema: { type: string }
+        - name: limit
+          in: query
+          schema: { type: integer, default: 25 }
+        - name: offset
+          in: query
+          schema: { type: integer }
+      responses:
+        '200': { description: OK }
+  /catalog/{storefront}/search/hints:
+    get:
+      tags: [Search]
+      summary: Get search hints for the catalog
+      parameters:
+        - $ref: '#/components/parameters/Storefront'
+        - name: term
+          in: query
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: OK }
+  /catalog/{storefront}/charts:
+    get:
+      tags: [Charts]
+      summary: Get catalog charts
+      parameters:
+        - $ref: '#/components/parameters/Storefront'
+        - name: types
+          in: query
+          required: true
+          schema: { type: string }
+        - name: chart
+          in: query
+          schema: { type: string }
+        - name: genre
+          in: query
+          schema: { type: string }
+        - name: limit
+          in: query
+          schema: { type: integer }
+      responses:
+        '200': { description: OK }
+  /me/library/songs:
+    get:
+      tags: [Library]
+      summary: Get the user's library songs
+      responses:
+        '200': { description: OK }
+      security:
+        - DeveloperToken: []
+          MusicUserToken: []
+  /me/library/albums:
+    get:
+      tags: [Library]
+      summary: Get the user's library albums
+      responses:
+        '200': { description: OK }
+      security:
+        - DeveloperToken: []
+          MusicUserToken: []
+  /me/library/artists:
+    get:
+      tags: [Library]
+      summary: Get the user's library artists
+      responses:
+        '200': { description: OK }
+      security:
+        - DeveloperToken: []
+          MusicUserToken: []
+  /me/library/playlists:
+    get:
+      tags: [Library]
+      summary: Get the user's library playlists
+      responses:
+        '200': { description: OK }
+      security:
+        - DeveloperToken: []
+          MusicUserToken: []
+    post:
+      tags: [Library]
+      summary: Create a new library playlist
+      responses:
+        '201': { description: Created }
+      security:
+        - DeveloperToken: []
+          MusicUserToken: []
+  /me/library/search:
+    get:
+      tags: [Library]
+      summary: Search the user's library
+      parameters:
+        - name: term
+          in: query
+          required: true
+          schema: { type: string }
+        - name: types
+          in: query
+          schema: { type: string }
+      responses:
+        '200': { description: OK }
+      security:
+        - DeveloperToken: []
+          MusicUserToken: []
+  /me/recommendations:
+    get:
+      tags: [Library]
+      summary: Get personalized recommendations for the user
+      responses:
+        '200': { description: OK }
+      security:
+        - DeveloperToken: []
+          MusicUserToken: []
+  /me/recent/played:
+    get:
+      tags: [Library]
+      summary: Get the user's recently played resources
+      responses:
+        '200': { description: OK }
+      security:
+        - DeveloperToken: []
+          MusicUserToken: []
+  /me/storefront:
+    get:
+      tags: [Storefronts]
+      summary: Get the user's storefront
+      responses:
+        '200': { description: OK }
+      security:
+        - DeveloperToken: []
+          MusicUserToken: []
+  /storefronts:
+    get:
+      tags: [Storefronts]
+      summary: List all storefronts
+      responses:
+        '200': { description: OK }
+  /storefronts/{id}:
+    get:
+      tags: [Storefronts]
+      summary: Get a storefront
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200': { description: OK }
+components:
+  parameters:
+    Storefront:
+      name: storefront
+      in: path
+      required: true
+      description: Apple Music storefront identifier (e.g. us, gb, jp)
+      schema: { type: string }
+    Id:
+      name: id
+      in: path
+      required: true
+      schema: { type: string }
+    Ids:
+      name: ids
+      in: query
+      required: true
+      description: Comma-separated list of resource ids
+      schema: { type: string }
+  securitySchemes:
+    DeveloperToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: |
+        Apple Music developer token (JWT) generated from a Music Key in the
+        Apple Developer account.
+    MusicUserToken:
+      type: apiKey
+      in: header
+      name: Music-User-Token
+      description: |
+        Music User Token obtained via MusicKit on a signed-in device. Required
+        for user-library endpoints.
+security:
+  - DeveloperToken: []
