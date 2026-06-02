@@ -1,0 +1,134 @@
+aid: apple-music
+name: Apple Music
+subject: Webhook and Streaming Surface Review
+reviewed: '2026-05-30'
+reviewer: Kin Lane
+question: >-
+  Does Apple Music expose a documented server-to-server webhook, event
+  subscription, or streaming surface that publishers (Apple) push to subscriber
+  endpoints?
+finding: NoDocumentedWebhookSurface
+summary: >-
+  Apple Music does not publish a server-to-server webhook, event subscription,
+  HTTP push, or publisher-driven streaming surface for the Apple Music API.
+  The platform is a request/response REST API rooted at
+  https://api.music.apple.com/v1 plus the MusicKit family of client SDKs
+  (MusicKit on the Web / MusicKit JS, MusicKit for Swift, MusicKit for
+  Android). All "event" semantics live inside the client SDK as in-process
+  listener callbacks on a MusicKit instance; they are not delivered to
+  developer-controlled HTTPS endpoints.
+sourcesReviewed:
+  - type: Documentation
+    name: Apple Music API
+    url: https://developer.apple.com/documentation/applemusicapi/
+  - type: Documentation
+    name: MusicKit
+    url: https://developer.apple.com/musickit/
+  - type: Documentation
+    name: MusicKit on the Web (v3) Reference
+    url: https://js-cdn.music.apple.com/musickit/v3/docs/index.html
+  - type: Documentation
+    name: MusicKit JS v1 Reference
+    url: https://js-cdn.music.apple.com/musickit/v1/index.html
+  - type: Documentation
+    name: Apple Developer - Enabling Server-to-Server Notifications
+    url: https://developer.apple.com/help/account/capabilities/enabling-server-to-server-notifications/
+  - type: Documentation
+    name: App Store Connect API - Webhook Notifications
+    url: https://developer.apple.com/documentation/appstoreconnectapi/webhook-notifications
+restSurface:
+  baseURL: https://api.music.apple.com/v1
+  pattern: RequestResponse
+  authentication:
+    - DeveloperToken
+    - MusicUserToken
+  notes: >-
+    All catalog, library, charts, recommendations, search, and ratings access
+    is initiated by the client. There is no documented endpoint to register a
+    callback URL, no event subscription resource, and no documented payload
+    contract for Apple-initiated POSTs to a subscriber endpoint.
+serverWebhooks:
+  documented: false
+  evidence: >-
+    The developer.apple.com Apple Music API table of contents and the
+    "Enabling server-to-server notifications" capabilities page enumerate only
+    Sign in with Apple, App Store Server Notifications, and App Store Connect
+    API webhooks. None of these belong to or are scoped to the Apple Music
+    catalog, library, or playback domain. No "music" topic, channel, or event
+    type is exposed in any of Apple's webhook documentation.
+serverSentEvents:
+  documented: false
+  evidence: >-
+    api.music.apple.com endpoints respond as standard JSON over HTTPS. No
+    text/event-stream media type, long-lived streaming connection, or
+    Server-Sent Events surface is described in the Apple Music API
+    documentation.
+websocketSurface:
+  documented: false
+  evidence: >-
+    No wss:// endpoint, channel, or socket protocol is documented for Apple
+    Music. MusicKit on the Web communicates with Apple over HTTPS via the
+    bundled SDK; the underlying transport is not a public, documented
+    developer surface.
+clientEventModel:
+  type: InProcessListener
+  sdk: MusicKit JS (MusicKit on the Web)
+  registration: |
+    const music = MusicKit.getInstance();
+    music.addEventListener('playbackStateDidChange', (e) => { ... });
+  notes: >-
+    Events are dispatched only inside the user's browser/app process by the
+    MusicKit instance. They are NOT delivered to a developer server and are
+    NOT a webhook surface. They are useful for building responsive playback
+    UIs, not for backend integrations.
+  confirmedEventNames:
+    - playbackStateDidChange
+    - mediaPlaybackError
+    - nowPlayingItemDidChange
+    - mediaItemDidChange
+    - metadataDidChange
+    - queueItemsDidChange
+    - queueIsReady
+    - loaded
+  confirmedEventNamesSource: >-
+    Cited in Apple Developer Forums threads and Apple's MusicKit JS v1
+    reference (https://js-cdn.music.apple.com/musickit/v1/index.html and
+    https://developer.apple.com/forums/thread/775085). Additional events
+    likely exist in the v3 SDK but are documented inside the Storybook UI
+    at https://js-cdn.music.apple.com/musickit/v3/docs/index.html and were
+    not directly enumerable via WebFetch; only events independently
+    confirmed by Apple sources are listed here to avoid fabrication.
+adjacentAppleWebhookSurfaces:
+  - name: App Store Server Notifications V2
+    scope: In-app purchase / subscription lifecycle for apps distributed via
+           the App Store. Not Apple Music catalog or playback events.
+    url: https://developer.apple.com/documentation/appstoreservernotifications
+  - name: App Store Connect API Webhook Notifications
+    scope: App Store Connect resource events (builds, app reviews,
+           TestFlight). Not Apple Music.
+    url: https://developer.apple.com/documentation/appstoreconnectapi/webhook-notifications
+  - name: Sign in with Apple - Server-to-Server Notifications
+    scope: Account-level events (email forwarding changes, account deletion).
+           Not Apple Music.
+    url: https://developer.apple.com/documentation/sign_in_with_apple/processing_changes_for_sign_in_with_apple_accounts
+  notes: >-
+    These are the only Apple platform surfaces that POST events to a
+    developer endpoint. None of them carry Apple Music catalog, library, or
+    playback events.
+recommendation:
+  asyncapiSpec: NotApplicable
+  reason: >-
+    AsyncAPI is appropriate for documenting publish/subscribe surfaces with a
+    defined transport (HTTP webhook, WebSocket, MQTT, Kafka, SSE). Apple
+    Music exposes none of these for its music domain. The MusicKit client
+    event listeners are in-process JavaScript callbacks and do not have a
+    network protocol or message contract suitable for AsyncAPI modeling.
+  forIntegrators: >-
+    Backend systems that need to react to Apple Music state changes must
+    poll the REST API on a schedule (e.g., the "recently-played" and
+    library endpoints) using a stored Music User Token, or surface events
+    from the MusicKit client to their own backend over a developer-built
+    channel.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
