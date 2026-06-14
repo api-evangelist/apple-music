@@ -2,52 +2,58 @@ aid: apple-music
 url: https://raw.githubusercontent.com/api-evangelist/apple-music/refs/heads/main/apis.yml
 name: Apple Music
 kind: company
-description: >-
-  Apple Music is Apple's streaming music service. The Apple Music API and MusicKit framework give developers access to the Apple Music catalog, user library, charts, recommendations, search, and playback control. Authentication is via Apple Developer Program JWT tokens; user library access requires a MusicKit Music User Token.
+description: Apple Music is Apple's streaming music service. The Apple Music API and
+  MusicKit framework give developers access to the Apple Music catalog, user library,
+  charts, recommendations, search, and playback control. Authentication is via Apple
+  Developer Program JWT tokens; user library access requires a MusicKit Music User
+  Token.
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Music
-  - Streaming
-  - Apple
-  - MusicKit
-  - Catalog
-  - Library
+- Music
+- Streaming
+- Apple
+- MusicKit
+- Catalog
+- Library
 created: '2026-05-08'
 modified: '2026-05-30'
 specificationVersion: '0.19'
 apis:
-  - aid: apple-music:catalog-library
-    name: Apple Music API
-    description: >-
-      REST API for Apple Music: catalog (songs, albums, artists, music videos, playlists, stations), search, charts, recommendations, and the authenticated user's library, playlists, and ratings.
-    humanURL: https://developer.apple.com/documentation/applemusicapi
-    baseURL: https://api.music.apple.com/v1
-    tags:
-      - Catalog
-      - Library
-      - Search
-      - Charts
-      - Recommendations
-    properties:
-      - type: Documentation
-        url: https://developer.apple.com/documentation/applemusicapi
-      - type: Authentication
-        url: https://developer.apple.com/documentation/applemusicapi/getting_keys_and_creating_tokens
-      - type: SDK
-        url: https://developer.apple.com/musickit/
-common:
-  - type: Website
-    url: https://developer.apple.com/apple-music/
-  - type: DeveloperPortal
+- aid: apple-music:catalog-library
+  name: Apple Music API
+  description: 'REST API for Apple Music: catalog (songs, albums, artists, music videos,
+    playlists, stations), search, charts, recommendations, and the authenticated user''s
+    library, playlists, and ratings.'
+  humanURL: https://developer.apple.com/documentation/applemusicapi
+  baseURL: https://api.music.apple.com/v1
+  tags:
+  - Catalog
+  - Library
+  - Search
+  - Charts
+  - Recommendations
+  properties:
+  - type: Documentation
     url: https://developer.apple.com/documentation/applemusicapi
-  - type: Plans
-    url: plans/apple-music-plans-pricing.yml
-  - type: RateLimits
-    url: rate-limits/apple-music-rate-limits.yml
-  - type: FinOps
-    url: finops/apple-music-finops.yml
-  - type: Review
-    url: review.yml
+  - type: Authentication
+    url: https://developer.apple.com/documentation/applemusicapi/getting_keys_and_creating_tokens
+  - type: SDK
+    url: https://developer.apple.com/musickit/
+  - url: graphql/apple-music-graphql.md
+    type: GraphQL
+common:
+- type: Website
+  url: https://developer.apple.com/apple-music/
+- type: DeveloperPortal
+  url: https://developer.apple.com/documentation/applemusicapi
+- type: Plans
+  url: plans/apple-music-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/apple-music-rate-limits.yml
+- type: FinOps
+  url: finops/apple-music-finops.yml
+- type: Review
+  url: review.yml
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com

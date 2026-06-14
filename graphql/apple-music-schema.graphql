@@ -1,0 +1,950 @@
+# Apple Music GraphQL Schema
+# Conceptual GraphQL schema derived from the Apple Music REST API (MusicKit API)
+# Source: https://developer.apple.com/documentation/applemusicapi
+
+# -----------------------------------------------------------------------
+# Scalars
+# -----------------------------------------------------------------------
+
+scalar URL
+scalar DateTime
+scalar ISO8601Duration
+
+# -----------------------------------------------------------------------
+# Enums
+# -----------------------------------------------------------------------
+
+enum ContentRating {
+  CLEAN
+  EXPLICIT
+  NOT_EXPLICIT
+}
+
+enum PlaylistType {
+  USER_SHARED
+  EDITORIAL
+  EXTERNAL
+  PERSONAL_MIX
+  REPLAY
+}
+
+enum StationType {
+  APPLE_MUSIC
+  BEATS_ONE
+  USER
+  RADIO
+}
+
+# -----------------------------------------------------------------------
+# Artwork Types
+# -----------------------------------------------------------------------
+
+type ArtworkURL {
+  template: String!
+  width: Int
+  height: Int
+}
+
+type ArtworkDetails {
+  width: Int!
+  height: Int!
+  url: URL!
+  bgColor: String
+  textColor1: String
+  textColor2: String
+  textColor3: String
+  textColor4: String
+}
+
+type Artwork {
+  id: ID!
+  details: ArtworkDetails
+  url: ArtworkURL
+}
+
+# -----------------------------------------------------------------------
+# Genre Types
+# -----------------------------------------------------------------------
+
+type GenreName {
+  name: String!
+}
+
+type GenreDetails {
+  id: ID!
+  name: String!
+  parentId: String
+  parentName: String
+}
+
+type Genre {
+  id: ID!
+  type: String!
+  href: String
+  attributes: GenreDetails
+}
+
+# -----------------------------------------------------------------------
+# Artist Types
+# -----------------------------------------------------------------------
+
+type ArtistBio {
+  content: String
+  lastUpdated: DateTime
+  source: String
+  url: URL
+}
+
+type ArtistAttributes {
+  name: String!
+  genreNames: [String!]!
+  url: URL
+  artwork: ArtworkDetails
+  editorialNotes: EditorialNotes
+}
+
+type ArtistGenres {
+  data: [Genre!]!
+  href: String
+  next: String
+}
+
+type ArtistAlbums {
+  data: [Album!]!
+  href: String
+  next: String
+}
+
+type ArtistSongs {
+  data: [Song!]!
+  href: String
+  next: String
+}
+
+type ArtistPlaylists {
+  data: [Playlist!]!
+  href: String
+  next: String
+}
+
+type ArtistDetails {
+  id: ID!
+  type: String!
+  href: String
+  attributes: ArtistAttributes
+  relationships: ArtistRelationships
+  bio: ArtistBio
+}
+
+type ArtistRelationships {
+  albums: ArtistAlbums
+  genres: ArtistGenres
+  musicVideos: MusicVideoConnection
+  playlists: ArtistPlaylists
+  songs: ArtistSongs
+}
+
+type Artist {
+  id: ID!
+  type: String!
+  href: String
+  attributes: ArtistAttributes
+  relationships: ArtistRelationships
+}
+
+# -----------------------------------------------------------------------
+# Album Types
+# -----------------------------------------------------------------------
+
+type AlbumAttributes {
+  artistName: String!
+  artwork: ArtworkDetails
+  contentRating: ContentRating
+  copyright: String
+  editorialNotes: EditorialNotes
+  genreNames: [String!]!
+  isCompilation: Boolean
+  isComplete: Boolean
+  isMasteredForItunes: Boolean
+  isSingle: Boolean
+  name: String!
+  playParams: PlayParameters
+  recordLabel: String
+  releaseDate: String
+  trackCount: Int!
+  upc: String
+  url: URL
+}
+
+type AlbumSongs {
+  data: [Song!]!
+  href: String
+  next: String
+}
+
+type AlbumArtwork {
+  data: ArtworkDetails
+  href: String
+}
+
+type AlbumDetails {
+  id: ID!
+  type: String!
+  href: String
+  attributes: AlbumAttributes
+  relationships: AlbumRelationships
+}
+
+type AlbumRelationships {
+  artists: ArtistConnection
+  genres: GenreConnection
+  tracks: AlbumSongs
+}
+
+type Album {
+  id: ID!
+  type: String!
+  href: String
+  attributes: AlbumAttributes
+  relationships: AlbumRelationships
+}
+
+# -----------------------------------------------------------------------
+# Song Types
+# -----------------------------------------------------------------------
+
+type SongAttributes {
+  albumName: String
+  artistName: String!
+  artwork: ArtworkDetails
+  attribution: String
+  composerName: String
+  contentRating: ContentRating
+  discNumber: Int
+  durationInMillis: Int
+  editorialNotes: EditorialNotes
+  genreNames: [String!]!
+  hasLyrics: Boolean
+  isAppleDigitalMaster: Boolean
+  isrc: String
+  movementCount: Int
+  movementName: String
+  movementNumber: Int
+  name: String!
+  playParams: PlayParameters
+  previews: [Preview!]
+  releaseDate: String
+  trackNumber: Int
+  url: URL
+  workName: String
+}
+
+type SongArtists {
+  data: [Artist!]!
+  href: String
+  next: String
+}
+
+type SongAlbums {
+  data: [Album!]!
+  href: String
+  next: String
+}
+
+type SongGenres {
+  data: [Genre!]!
+  href: String
+  next: String
+}
+
+type SongRelationships {
+  albums: SongAlbums
+  artists: SongArtists
+  composers: ArtistConnection
+  genres: SongGenres
+  library: LibrarySongConnection
+  station: StationConnection
+}
+
+type SongDetails {
+  id: ID!
+  type: String!
+  href: String
+  attributes: SongAttributes
+  relationships: SongRelationships
+}
+
+type Song {
+  id: ID!
+  type: String!
+  href: String
+  attributes: SongAttributes
+  relationships: SongRelationships
+}
+
+# -----------------------------------------------------------------------
+# Music Video Types
+# -----------------------------------------------------------------------
+
+type MusicVideoAttributes {
+  albumName: String
+  artistName: String!
+  artwork: ArtworkDetails
+  contentRating: ContentRating
+  durationInMillis: Int
+  editorialNotes: EditorialNotes
+  genreNames: [String!]!
+  has4K: Boolean
+  hasHDR: Boolean
+  isrc: String
+  name: String!
+  playParams: PlayParameters
+  previews: [Preview!]
+  releaseDate: String
+  trackNumber: Int
+  url: URL
+  videoSubType: String
+  workId: String
+  workName: String
+}
+
+type MusicVideoDetails {
+  id: ID!
+  type: String!
+  href: String
+  attributes: MusicVideoAttributes
+  relationships: MusicVideoRelationships
+}
+
+type MusicVideoRelationships {
+  albums: AlbumConnection
+  artists: ArtistConnection
+  genres: GenreConnection
+  library: LibraryMusicVideoConnection
+}
+
+type MusicVideo {
+  id: ID!
+  type: String!
+  href: String
+  attributes: MusicVideoAttributes
+  relationships: MusicVideoRelationships
+}
+
+# -----------------------------------------------------------------------
+# Playlist Types
+# -----------------------------------------------------------------------
+
+type PlaylistAttributes {
+  artwork: ArtworkDetails
+  curatorName: String
+  description: EditorialNotes
+  isChart: Boolean
+  lastModifiedDate: DateTime
+  name: String!
+  playlistType: PlaylistType
+  playParams: PlayParameters
+  trackTypes: [String!]
+  url: URL
+}
+
+type PlaylistTracks {
+  data: [Song!]!
+  href: String
+  next: String
+}
+
+type PlaylistArtwork {
+  data: ArtworkDetails
+  href: String
+}
+
+type PlaylistDetails {
+  id: ID!
+  type: String!
+  href: String
+  attributes: PlaylistAttributes
+  relationships: PlaylistRelationships
+}
+
+type PlaylistRelationships {
+  curator: CuratorConnection
+  library: LibraryPlaylistConnection
+  tracks: PlaylistTracks
+}
+
+type Playlist {
+  id: ID!
+  type: String!
+  href: String
+  attributes: PlaylistAttributes
+  relationships: PlaylistRelationships
+}
+
+# -----------------------------------------------------------------------
+# Station Types
+# -----------------------------------------------------------------------
+
+type StationAttributes {
+  artwork: ArtworkDetails
+  durationInMillis: Int
+  editorialNotes: EditorialNotes
+  episodeNumber: Int
+  isLive: Boolean
+  name: String!
+  playParams: PlayParameters
+  stationProviderName: String
+  url: URL
+}
+
+type RadioStation {
+  id: ID!
+  type: String!
+  href: String
+  attributes: StationAttributes
+}
+
+type AppleMusicStation {
+  id: ID!
+  type: String!
+  href: String
+  attributes: StationAttributes
+}
+
+type BeatsStation {
+  id: ID!
+  type: String!
+  href: String
+  attributes: StationAttributes
+  episodeNumber: Int
+}
+
+type UserStation {
+  id: ID!
+  type: String!
+  href: String
+  attributes: StationAttributes
+  createdDate: DateTime
+}
+
+type Station {
+  id: ID!
+  type: String!
+  href: String
+  attributes: StationAttributes
+}
+
+# -----------------------------------------------------------------------
+# Curator Types
+# -----------------------------------------------------------------------
+
+type CuratorAttributes {
+  artwork: ArtworkDetails
+  editorialNotes: EditorialNotes
+  name: String!
+  url: URL
+}
+
+type CuratorPlaylist {
+  data: [Playlist!]!
+  href: String
+  next: String
+}
+
+type Curator {
+  id: ID!
+  type: String!
+  href: String
+  attributes: CuratorAttributes
+  relationships: CuratorRelationships
+}
+
+type CuratorRelationships {
+  playlists: CuratorPlaylist
+}
+
+# -----------------------------------------------------------------------
+# Library Types
+# -----------------------------------------------------------------------
+
+type LibrarySongAttributes {
+  albumName: String
+  artistName: String!
+  artwork: ArtworkDetails
+  contentRating: ContentRating
+  discNumber: Int
+  durationInMillis: Int
+  genreNames: [String!]!
+  hasLyrics: Boolean
+  name: String!
+  playParams: PlayParameters
+  releaseDate: String
+  trackNumber: Int
+}
+
+type LibraryAlbumAttributes {
+  artistName: String!
+  artwork: ArtworkDetails
+  contentRating: ContentRating
+  dateAdded: DateTime
+  genreNames: [String!]!
+  name: String!
+  playParams: PlayParameters
+  releaseDate: String
+  trackCount: Int
+}
+
+type LibraryArtistAttributes {
+  name: String!
+  genreNames: [String!]
+}
+
+type LibraryPlaylistAttributes {
+  artwork: ArtworkDetails
+  canEdit: Boolean
+  dateAdded: DateTime
+  description: EditorialNotes
+  hasCatalog: Boolean
+  isPublic: Boolean
+  name: String!
+  playParams: PlayParameters
+}
+
+type LibraryMusicVideoAttributes {
+  albumName: String
+  artistName: String!
+  artwork: ArtworkDetails
+  contentRating: ContentRating
+  durationInMillis: Int
+  genreNames: [String!]!
+  name: String!
+  playParams: PlayParameters
+  releaseDate: String
+  trackNumber: Int
+}
+
+type LibrarySongPlayback {
+  id: ID!
+  playParams: PlayParameters
+  durationInMillis: Int
+  remainingTime: Int
+}
+
+type LibrarySong {
+  id: ID!
+  type: String!
+  href: String
+  attributes: LibrarySongAttributes
+  relationships: LibrarySongRelationships
+}
+
+type LibrarySongRelationships {
+  albums: LibraryAlbumConnection
+  artists: LibraryArtistConnection
+}
+
+type LibraryAlbum {
+  id: ID!
+  type: String!
+  href: String
+  attributes: LibraryAlbumAttributes
+  relationships: LibraryAlbumRelationships
+}
+
+type LibraryAlbumRelationships {
+  artists: LibraryArtistConnection
+  tracks: LibrarySongConnection
+}
+
+type LibraryArtist {
+  id: ID!
+  type: String!
+  href: String
+  attributes: LibraryArtistAttributes
+  relationships: LibraryArtistRelationships
+}
+
+type LibraryArtistRelationships {
+  albums: LibraryAlbumConnection
+}
+
+type LibraryPlaylist {
+  id: ID!
+  type: String!
+  href: String
+  attributes: LibraryPlaylistAttributes
+  relationships: LibraryPlaylistRelationships
+}
+
+type LibraryPlaylistRelationships {
+  tracks: LibrarySongConnection
+}
+
+type LibraryMusicVideo {
+  id: ID!
+  type: String!
+  href: String
+  attributes: LibraryMusicVideoAttributes
+  relationships: LibraryMusicVideoRelationships
+}
+
+type LibraryMusicVideoRelationships {
+  albums: LibraryAlbumConnection
+  artists: LibraryArtistConnection
+}
+
+# -----------------------------------------------------------------------
+# StoreFront Types
+# -----------------------------------------------------------------------
+
+type StoreFrontAttributes {
+  defaultLanguageTag: String!
+  explicitContentPolicy: String!
+  name: String!
+  supportedLanguageTags: [String!]!
+}
+
+type StoreFrontDetails {
+  id: ID!
+  type: String!
+  href: String
+  attributes: StoreFrontAttributes
+}
+
+type StoreFront {
+  id: ID!
+  type: String!
+  href: String
+  attributes: StoreFrontAttributes
+}
+
+# -----------------------------------------------------------------------
+# Search Types
+# -----------------------------------------------------------------------
+
+type SearchHints {
+  terms: [String!]!
+}
+
+type SearchResult {
+  songs: SongConnection
+  albums: AlbumConnection
+  artists: ArtistConnection
+  playlists: PlaylistConnection
+  musicVideos: MusicVideoConnection
+  stations: StationConnection
+  curators: CuratorConnection
+}
+
+type CatalogSearch {
+  results: SearchResult
+  meta: SearchMeta
+}
+
+type LibrarySearch {
+  results: LibrarySearchResult
+  meta: SearchMeta
+}
+
+type LibrarySearchResult {
+  songs: LibrarySongConnection
+  albums: LibraryAlbumConnection
+  artists: LibraryArtistConnection
+  playlists: LibraryPlaylistConnection
+  musicVideos: LibraryMusicVideoConnection
+}
+
+type Search {
+  catalog: CatalogSearch
+  library: LibrarySearch
+  hints: SearchHints
+}
+
+# -----------------------------------------------------------------------
+# Discovery / Personalization Types
+# -----------------------------------------------------------------------
+
+type PersonalMix {
+  id: ID!
+  type: String!
+  href: String
+  attributes: PlaylistAttributes
+}
+
+type PersonalStation {
+  id: ID!
+  type: String!
+  href: String
+  attributes: StationAttributes
+}
+
+type Recommendations {
+  data: [Playlist!]!
+  personalMixes: [PersonalMix!]
+  stations: [PersonalStation!]
+  next: String
+}
+
+type RecentlyPlayed {
+  data: [RecentlyPlayedItem!]!
+  next: String
+}
+
+type SocialActivity {
+  userId: ID!
+  recentlyPlayed: RecentlyPlayed
+  recommendations: Recommendations
+}
+
+# -----------------------------------------------------------------------
+# Authentication / Token Types
+# -----------------------------------------------------------------------
+
+type DeveloperToken {
+  token: String!
+  expiresAt: DateTime
+  teamId: String
+  keyId: String
+}
+
+type UserToken {
+  musicUserToken: String!
+  expiresAt: DateTime
+}
+
+type APIKey {
+  keyId: String!
+  teamId: String!
+  privateKey: String
+  algorithm: String
+}
+
+type MusicKitToken {
+  developerToken: DeveloperToken
+  userToken: UserToken
+  storefront: String
+}
+
+# -----------------------------------------------------------------------
+# Supporting / Utility Types
+# -----------------------------------------------------------------------
+
+type EditorialNotes {
+  name: String
+  short: String
+  standard: String
+  tagline: String
+}
+
+type PlayParameters {
+  id: String!
+  kind: String!
+  isLibrary: Boolean
+  reporting: Boolean
+  reportingId: String
+  versionHash: String
+}
+
+type Preview {
+  artwork: ArtworkDetails
+  url: URL!
+  hlsUrl: URL
+}
+
+type SearchMeta {
+  results: SearchMetaResults
+}
+
+type SearchMetaResults {
+  order: [String!]
+  rawOrder: [String!]
+}
+
+# -----------------------------------------------------------------------
+# Connection / Pagination Types
+# -----------------------------------------------------------------------
+
+type SongConnection {
+  data: [Song!]!
+  href: String
+  next: String
+}
+
+type AlbumConnection {
+  data: [Album!]!
+  href: String
+  next: String
+}
+
+type ArtistConnection {
+  data: [Artist!]!
+  href: String
+  next: String
+}
+
+type PlaylistConnection {
+  data: [Playlist!]!
+  href: String
+  next: String
+}
+
+type MusicVideoConnection {
+  data: [MusicVideo!]!
+  href: String
+  next: String
+}
+
+type StationConnection {
+  data: [Station!]!
+  href: String
+  next: String
+}
+
+type CuratorConnection {
+  data: [Curator!]!
+  href: String
+  next: String
+}
+
+type GenreConnection {
+  data: [Genre!]!
+  href: String
+  next: String
+}
+
+type LibrarySongConnection {
+  data: [LibrarySong!]!
+  href: String
+  next: String
+}
+
+type LibraryAlbumConnection {
+  data: [LibraryAlbum!]!
+  href: String
+  next: String
+}
+
+type LibraryArtistConnection {
+  data: [LibraryArtist!]!
+  href: String
+  next: String
+}
+
+type LibraryPlaylistConnection {
+  data: [LibraryPlaylist!]!
+  href: String
+  next: String
+}
+
+type LibraryMusicVideoConnection {
+  data: [LibraryMusicVideo!]!
+  href: String
+  next: String
+}
+
+type RecentlyPlayedItem {
+  id: ID!
+  type: String!
+  href: String
+  attributes: RecentlyPlayedAttributes
+}
+
+type RecentlyPlayedAttributes {
+  name: String!
+  artwork: ArtworkDetails
+  playParams: PlayParameters
+  url: URL
+}
+
+# -----------------------------------------------------------------------
+# Root Query Type
+# -----------------------------------------------------------------------
+
+type Query {
+  # Catalog — Songs
+  song(id: ID!, storefront: String!): Song
+  songs(ids: [ID!]!, storefront: String!): SongConnection
+  songDetails(id: ID!, storefront: String!): SongDetails
+
+  # Catalog — Albums
+  album(id: ID!, storefront: String!): Album
+  albums(ids: [ID!]!, storefront: String!): AlbumConnection
+  albumDetails(id: ID!, storefront: String!): AlbumDetails
+
+  # Catalog — Artists
+  artist(id: ID!, storefront: String!): Artist
+  artists(ids: [ID!]!, storefront: String!): ArtistConnection
+  artistDetails(id: ID!, storefront: String!): ArtistDetails
+
+  # Catalog — Music Videos
+  musicVideo(id: ID!, storefront: String!): MusicVideo
+  musicVideos(ids: [ID!]!, storefront: String!): MusicVideoConnection
+  musicVideoDetails(id: ID!, storefront: String!): MusicVideoDetails
+
+  # Catalog — Playlists
+  playlist(id: ID!, storefront: String!): Playlist
+  playlists(ids: [ID!]!, storefront: String!): PlaylistConnection
+  playlistDetails(id: ID!, storefront: String!): PlaylistDetails
+
+  # Catalog — Stations
+  station(id: ID!, storefront: String!): Station
+  stations(ids: [ID!]!, storefront: String!): StationConnection
+
+  # Catalog — Genres
+  genre(id: ID!, storefront: String!): Genre
+  genres(storefront: String!): GenreConnection
+
+  # Catalog — Curators
+  curator(id: ID!, storefront: String!): Curator
+  curators(ids: [ID!]!, storefront: String!): CuratorConnection
+
+  # Search
+  search(term: String!, storefront: String!, types: [String!], limit: Int, offset: Int): Search
+  searchHints(term: String!, storefront: String!): SearchHints
+  catalogSearch(term: String!, storefront: String!, types: [String!], limit: Int, offset: Int): CatalogSearch
+  librarySearch(term: String!, types: [String!], limit: Int, offset: Int): LibrarySearch
+
+  # StoreFronts
+  storefront(id: ID!): StoreFront
+  storefronts(ids: [ID!]!): [StoreFront!]!
+  storefrontDetails(id: ID!): StoreFrontDetails
+
+  # Library (requires Music User Token)
+  libraryAlbum(id: ID!): LibraryAlbum
+  libraryAlbums(limit: Int, offset: Int): LibraryAlbumConnection
+  libraryArtist(id: ID!): LibraryArtist
+  libraryArtists(limit: Int, offset: Int): LibraryArtistConnection
+  librarySong(id: ID!): LibrarySong
+  librarySongs(limit: Int, offset: Int): LibrarySongConnection
+  libraryPlaylist(id: ID!): LibraryPlaylist
+  libraryPlaylists(limit: Int, offset: Int): LibraryPlaylistConnection
+  libraryMusicVideo(id: ID!): LibraryMusicVideo
+  libraryMusicVideos(limit: Int, offset: Int): LibraryMusicVideoConnection
+  librarySongPlayback(id: ID!): LibrarySongPlayback
+
+  # Personalization (requires Music User Token)
+  recentlyPlayed(limit: Int, offset: Int): RecentlyPlayed
+  recommendations(limit: Int, offset: Int): Recommendations
+  personalMixes: [PersonalMix!]
+  socialActivity(userId: ID!): SocialActivity
+}
+
+# -----------------------------------------------------------------------
+# Root Mutation Type
+# -----------------------------------------------------------------------
+
+type Mutation {
+  # Library management
+  addSongToLibrary(catalogId: ID!): LibrarySong
+  addAlbumToLibrary(catalogId: ID!): LibraryAlbum
+  addPlaylistToLibrary(catalogId: ID!): LibraryPlaylist
+  addMusicVideoToLibrary(catalogId: ID!): LibraryMusicVideo
+
+  # Playlist management
+  createLibraryPlaylist(name: String!, description: String, tracks: [ID!]): LibraryPlaylist
+  addTracksToLibraryPlaylist(playlistId: ID!, trackIds: [ID!]!): LibraryPlaylist
+
+  # Ratings
+  rateSong(catalogId: ID!, rating: Int!): Song
+  rateAlbum(catalogId: ID!, rating: Int!): Album
+}
