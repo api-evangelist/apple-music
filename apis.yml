@@ -37,7 +37,7 @@ apis:
     url: https://developer.apple.com/documentation/applemusicapi
   - type: Authentication
     url: https://developer.apple.com/documentation/applemusicapi/getting_keys_and_creating_tokens
-  - type: SDK
+  - type: SDKs
     url: https://developer.apple.com/musickit/
   - url: graphql/apple-music-graphql.md
     type: GraphQL
