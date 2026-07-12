@@ -42,6 +42,12 @@ apis:
   - url: graphql/apple-music-graphql.md
     type: GraphQL
 common:
+- type: VulnerabilityDisclosure
+  url: security/apple-music-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/apple-music-domain-security.yml
+- type: Authentication
+  url: authentication/apple-music-authentication.yml
 - type: Website
   url: https://developer.apple.com/apple-music/
 - type: DeveloperPortal
