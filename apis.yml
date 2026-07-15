@@ -42,6 +42,8 @@ apis:
   - url: graphql/apple-music-graphql.md
     type: GraphQL
 common:
+- type: AgenticAccess
+  url: agentic-access/apple-music-agentic-access.yml
 - type: VulnerabilityDisclosure
   url: security/apple-music-vulnerability-disclosure.yml
 - type: DomainSecurity
