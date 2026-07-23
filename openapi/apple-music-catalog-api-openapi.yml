@@ -1,0 +1,178 @@
+openapi: 3.1.0
+info:
+  title: Apple Music Catalog API
+  version: '1.0'
+  description: 'REST API for the Apple Music catalog and the authenticated user''s library.
+
+    Catalog endpoints (songs, albums, artists, music videos, playlists,
+
+    stations, search, charts) require an Apple Developer JWT in the
+
+    Authorization header. User-library endpoints additionally require a
+
+    Music User Token in the Music-User-Token header.
+
+    '
+  contact:
+    name: Apple Developer Documentation
+    url: https://developer.apple.com/documentation/applemusicapi
+servers:
+- url: https://api.music.apple.com/v1
+  description: Apple Music API v1
+security:
+- DeveloperToken: []
+tags:
+- name: Catalog
+  description: Apple Music catalog resources
+paths:
+  /catalog/{storefront}/songs/{id}:
+    get:
+      tags:
+      - Catalog
+      summary: Get a catalog song by id
+      parameters:
+      - $ref: '#/components/parameters/Storefront'
+      - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: OK
+  /catalog/{storefront}/songs:
+    get:
+      tags:
+      - Catalog
+      summary: Get catalog songs by ids
+      parameters:
+      - $ref: '#/components/parameters/Storefront'
+      - $ref: '#/components/parameters/Ids'
+      responses:
+        '200':
+          description: OK
+  /catalog/{storefront}/albums/{id}:
+    get:
+      tags:
+      - Catalog
+      summary: Get a catalog album by id
+      parameters:
+      - $ref: '#/components/parameters/Storefront'
+      - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: OK
+  /catalog/{storefront}/albums:
+    get:
+      tags:
+      - Catalog
+      summary: Get catalog albums by ids
+      parameters:
+      - $ref: '#/components/parameters/Storefront'
+      - $ref: '#/components/parameters/Ids'
+      responses:
+        '200':
+          description: OK
+  /catalog/{storefront}/artists/{id}:
+    get:
+      tags:
+      - Catalog
+      summary: Get a catalog artist by id
+      parameters:
+      - $ref: '#/components/parameters/Storefront'
+      - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: OK
+  /catalog/{storefront}/artists:
+    get:
+      tags:
+      - Catalog
+      summary: Get catalog artists by ids
+      parameters:
+      - $ref: '#/components/parameters/Storefront'
+      - $ref: '#/components/parameters/Ids'
+      responses:
+        '200':
+          description: OK
+  /catalog/{storefront}/playlists/{id}:
+    get:
+      tags:
+      - Catalog
+      summary: Get a catalog playlist by id
+      parameters:
+      - $ref: '#/components/parameters/Storefront'
+      - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: OK
+  /catalog/{storefront}/playlists:
+    get:
+      tags:
+      - Catalog
+      summary: Get catalog playlists by ids
+      parameters:
+      - $ref: '#/components/parameters/Storefront'
+      - $ref: '#/components/parameters/Ids'
+      responses:
+        '200':
+          description: OK
+  /catalog/{storefront}/music-videos/{id}:
+    get:
+      tags:
+      - Catalog
+      summary: Get a catalog music video by id
+      parameters:
+      - $ref: '#/components/parameters/Storefront'
+      - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: OK
+  /catalog/{storefront}/stations/{id}:
+    get:
+      tags:
+      - Catalog
+      summary: Get a catalog station by id
+      parameters:
+      - $ref: '#/components/parameters/Storefront'
+      - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: OK
+components:
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    Storefront:
+      name: storefront
+      in: path
+      required: true
+      description: Apple Music storefront identifier (e.g. us, gb, jp)
+      schema:
+        type: string
+    Ids:
+      name: ids
+      in: query
+      required: true
+      description: Comma-separated list of resource ids
+      schema:
+        type: string
+  securitySchemes:
+    DeveloperToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Apple Music developer token (JWT) generated from a Music Key in the
+
+        Apple Developer account.
+
+        '
+    MusicUserToken:
+      type: apiKey
+      in: header
+      name: Music-User-Token
+      description: 'Music User Token obtained via MusicKit on a signed-in device. Required
+
+        for user-library endpoints.
+
+        '

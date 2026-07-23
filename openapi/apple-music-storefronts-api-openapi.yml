@@ -1,0 +1,82 @@
+openapi: 3.1.0
+info:
+  title: Apple Music Catalog Storefronts API
+  version: '1.0'
+  description: 'REST API for the Apple Music catalog and the authenticated user''s library.
+
+    Catalog endpoints (songs, albums, artists, music videos, playlists,
+
+    stations, search, charts) require an Apple Developer JWT in the
+
+    Authorization header. User-library endpoints additionally require a
+
+    Music User Token in the Music-User-Token header.
+
+    '
+  contact:
+    name: Apple Developer Documentation
+    url: https://developer.apple.com/documentation/applemusicapi
+servers:
+- url: https://api.music.apple.com/v1
+  description: Apple Music API v1
+security:
+- DeveloperToken: []
+tags:
+- name: Storefronts
+paths:
+  /me/storefront:
+    get:
+      tags:
+      - Storefronts
+      summary: Get the user's storefront
+      responses:
+        '200':
+          description: OK
+      security:
+      - DeveloperToken: []
+        MusicUserToken: []
+  /storefronts:
+    get:
+      tags:
+      - Storefronts
+      summary: List all storefronts
+      responses:
+        '200':
+          description: OK
+  /storefronts/{id}:
+    get:
+      tags:
+      - Storefronts
+      summary: Get a storefront
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: OK
+components:
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    DeveloperToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Apple Music developer token (JWT) generated from a Music Key in the
+
+        Apple Developer account.
+
+        '
+    MusicUserToken:
+      type: apiKey
+      in: header
+      name: Music-User-Token
+      description: 'Music User Token obtained via MusicKit on a signed-in device. Required
+
+        for user-library endpoints.
+
+        '

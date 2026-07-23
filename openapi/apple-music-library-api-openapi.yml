@@ -1,0 +1,144 @@
+openapi: 3.1.0
+info:
+  title: Apple Music Catalog Library API
+  version: '1.0'
+  description: 'REST API for the Apple Music catalog and the authenticated user''s library.
+
+    Catalog endpoints (songs, albums, artists, music videos, playlists,
+
+    stations, search, charts) require an Apple Developer JWT in the
+
+    Authorization header. User-library endpoints additionally require a
+
+    Music User Token in the Music-User-Token header.
+
+    '
+  contact:
+    name: Apple Developer Documentation
+    url: https://developer.apple.com/documentation/applemusicapi
+servers:
+- url: https://api.music.apple.com/v1
+  description: Apple Music API v1
+security:
+- DeveloperToken: []
+tags:
+- name: Library
+  description: Authenticated user library resources
+paths:
+  /me/library/songs:
+    get:
+      tags:
+      - Library
+      summary: Get the user's library songs
+      responses:
+        '200':
+          description: OK
+      security:
+      - DeveloperToken: []
+        MusicUserToken: []
+  /me/library/albums:
+    get:
+      tags:
+      - Library
+      summary: Get the user's library albums
+      responses:
+        '200':
+          description: OK
+      security:
+      - DeveloperToken: []
+        MusicUserToken: []
+  /me/library/artists:
+    get:
+      tags:
+      - Library
+      summary: Get the user's library artists
+      responses:
+        '200':
+          description: OK
+      security:
+      - DeveloperToken: []
+        MusicUserToken: []
+  /me/library/playlists:
+    get:
+      tags:
+      - Library
+      summary: Get the user's library playlists
+      responses:
+        '200':
+          description: OK
+      security:
+      - DeveloperToken: []
+        MusicUserToken: []
+    post:
+      tags:
+      - Library
+      summary: Create a new library playlist
+      responses:
+        '201':
+          description: Created
+      security:
+      - DeveloperToken: []
+        MusicUserToken: []
+  /me/library/search:
+    get:
+      tags:
+      - Library
+      summary: Search the user's library
+      parameters:
+      - name: term
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: types
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+      security:
+      - DeveloperToken: []
+        MusicUserToken: []
+  /me/recommendations:
+    get:
+      tags:
+      - Library
+      summary: Get personalized recommendations for the user
+      responses:
+        '200':
+          description: OK
+      security:
+      - DeveloperToken: []
+        MusicUserToken: []
+  /me/recent/played:
+    get:
+      tags:
+      - Library
+      summary: Get the user's recently played resources
+      responses:
+        '200':
+          description: OK
+      security:
+      - DeveloperToken: []
+        MusicUserToken: []
+components:
+  securitySchemes:
+    DeveloperToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Apple Music developer token (JWT) generated from a Music Key in the
+
+        Apple Developer account.
+
+        '
+    MusicUserToken:
+      type: apiKey
+      in: header
+      name: Music-User-Token
+      description: 'Music User Token obtained via MusicKit on a signed-in device. Required
+
+        for user-library endpoints.
+
+        '
