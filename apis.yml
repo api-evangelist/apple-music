@@ -7,7 +7,20 @@ description: Apple Music is Apple's streaming music service. The Apple Music API
   charts, recommendations, search, and playback control. Authentication is via Apple
   Developer Program JWT tokens; user library access requires a MusicKit Music User
   Token.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/apple-music.png
 tags:
 - Music
 - Streaming
@@ -21,9 +34,9 @@ specificationVersion: '0.19'
 apis:
 - aid: apple-music:catalog-library
   name: Apple Music API
-  description: 'REST API for Apple Music: catalog (songs, albums, artists, music videos,
-    playlists, stations), search, charts, recommendations, and the authenticated user''s
-    library, playlists, and ratings.'
+  description: >-
+    REST API for Apple Music: catalog (songs, albums, artists, music videos, playlists, stations), search,
+    charts, recommendations, and the authenticated user's library, playlists, and ratings.
   humanURL: https://developer.apple.com/documentation/applemusicapi
   baseURL: https://api.music.apple.com/v1
   tags:
@@ -41,6 +54,56 @@ apis:
     url: https://developer.apple.com/musickit/
   - url: graphql/apple-music-graphql.md
     type: GraphQL
+- aid: apple-music:apple-music-catalog-api
+  name: Apple Music Catalog API
+  description: Apple Music catalog resources
+  humanURL: https://developer.apple.com/documentation/applemusicapi
+  baseURL: https://api.music.apple.com/v1
+  tags:
+  - Catalog
+  properties:
+  - type: OpenAPI
+    url: openapi/apple-music-catalog-api-openapi.yml
+- aid: apple-music:apple-music-charts-api
+  name: Apple Music Charts API
+  description: The Charts API from Apple Music — 1 operation(s) for charts.
+  humanURL: https://developer.apple.com/documentation/applemusicapi
+  baseURL: https://api.music.apple.com/v1
+  tags:
+  - Charts
+  properties:
+  - type: OpenAPI
+    url: openapi/apple-music-charts-api-openapi.yml
+- aid: apple-music:apple-music-library-api
+  name: Apple Music Library API
+  description: Authenticated user library resources
+  humanURL: https://developer.apple.com/documentation/applemusicapi
+  baseURL: https://api.music.apple.com/v1
+  tags:
+  - Library
+  properties:
+  - type: OpenAPI
+    url: openapi/apple-music-library-api-openapi.yml
+- aid: apple-music:apple-music-search-api
+  name: Apple Music Search API
+  description: The Search API from Apple Music — 2 operation(s) for search.
+  humanURL: https://developer.apple.com/documentation/applemusicapi
+  baseURL: https://api.music.apple.com/v1
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/apple-music-search-api-openapi.yml
+- aid: apple-music:apple-music-storefronts-api
+  name: Apple Music Storefronts API
+  description: The Storefronts API from Apple Music — 3 operation(s) for storefronts.
+  humanURL: https://developer.apple.com/documentation/applemusicapi
+  baseURL: https://api.music.apple.com/v1
+  tags:
+  - Storefronts
+  properties:
+  - type: OpenAPI
+    url: openapi/apple-music-storefronts-api-openapi.yml
 common:
 - type: AgenticAccess
   url: agentic-access/apple-music-agentic-access.yml
