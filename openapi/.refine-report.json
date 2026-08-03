@@ -1,0 +1,22 @@
+{
+  "provider": "apple-music",
+  "sources": [
+    "apple-music-catalog-api-openapi.yml",
+    "apple-music-charts-api-openapi.yml",
+    "apple-music-library-api-openapi.yml",
+    "apple-music-search-api-openapi.yml",
+    "apple-music-storefronts-api-openapi.yml"
+  ],
+  "outputs": [
+    "apple-music-catalog-api-openapi.yml",
+    "apple-music-charts-api-openapi.yml",
+    "apple-music-library-api-openapi.yml",
+    "apple-music-search-api-openapi.yml",
+    "apple-music-storefronts-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
