@@ -1,0 +1,156 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Apple Music Catalog Library API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Library",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the user's library songs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.music.apple.com/v1/me/library/songs",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get the user's library songs"
+        },
+        {
+          "info": {
+            "name": "Get the user's library albums",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.music.apple.com/v1/me/library/albums",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get the user's library albums"
+        },
+        {
+          "info": {
+            "name": "Get the user's library artists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.music.apple.com/v1/me/library/artists",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get the user's library artists"
+        },
+        {
+          "info": {
+            "name": "Get the user's library playlists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.music.apple.com/v1/me/library/playlists",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get the user's library playlists"
+        },
+        {
+          "info": {
+            "name": "Create a new library playlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.music.apple.com/v1/me/library/playlists",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new library playlist"
+        },
+        {
+          "info": {
+            "name": "Search the user's library",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.music.apple.com/v1/me/library/search",
+            "params": [
+              {
+                "name": "term",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "types",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Search the user's library"
+        },
+        {
+          "info": {
+            "name": "Get personalized recommendations for the user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.music.apple.com/v1/me/recommendations",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get personalized recommendations for the user"
+        },
+        {
+          "info": {
+            "name": "Get the user's recently played resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.music.apple.com/v1/me/recent/played",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get the user's recently played resources"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

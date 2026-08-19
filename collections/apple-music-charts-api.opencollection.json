@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Apple Music Catalog Charts API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Charts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get catalog charts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.music.apple.com/v1/catalog/:storefront/charts",
+            "params": [
+              {
+                "name": "storefront",
+                "value": "",
+                "type": "path",
+                "description": "Apple Music storefront identifier (e.g. us, gb, jp)"
+              },
+              {
+                "name": "types",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "chart",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "genre",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get catalog charts"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

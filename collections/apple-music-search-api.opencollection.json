@@ -1,0 +1,88 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Apple Music Catalog Search API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search the catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.music.apple.com/v1/catalog/:storefront/search",
+            "params": [
+              {
+                "name": "storefront",
+                "value": "",
+                "type": "path",
+                "description": "Apple Music storefront identifier (e.g. us, gb, jp)"
+              },
+              {
+                "name": "term",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "types",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of resource types (e.g. songs,albums,artists,playlists)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search the catalog"
+        },
+        {
+          "info": {
+            "name": "Get search hints for the catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.music.apple.com/v1/catalog/:storefront/search/hints",
+            "params": [
+              {
+                "name": "storefront",
+                "value": "",
+                "type": "path",
+                "description": "Apple Music storefront identifier (e.g. us, gb, jp)"
+              },
+              {
+                "name": "term",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get search hints for the catalog"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

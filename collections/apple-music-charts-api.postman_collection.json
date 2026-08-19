@@ -1,0 +1,165 @@
+{
+  "item": [
+    {
+      "id": "1c865d22-3da5-4a82-a497-27b529013fdd",
+      "name": "Charts",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ec89c01e-30a0-4ad2-88d9-6c90df3565c7",
+          "name": "Get catalog charts",
+          "request": {
+            "name": "Get catalog charts",
+            "description": {},
+            "url": {
+              "path": [
+                "catalog",
+                ":storefront",
+                "charts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "types",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "chart",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "genre",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "storefront",
+                  "description": "(Required) Apple Music storefront identifier (e.g. us, gb, jp)"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c6954e05-2f45-404c-925d-4784002231c0",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    ":storefront",
+                    "charts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "chart",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "genre",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "storefront",
+                      "description": "(Required) Apple Music storefront identifier (e.g. us, gb, jp)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.music.apple.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f3e19f35-ce1a-4e84-9df7-63dc64f36a77",
+    "name": "Apple Music Catalog Charts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Apple Music catalog and the authenticated user's library.\nCatalog endpoints (songs, albums, artists, music videos, playlists,\nstations, search, charts) require an Apple Developer JWT in the\nAuthorization header. User-library endpoints additionally require a\nMusic User Token in the Music-User-Token header.\n\n\nContact Support:\n Name: Apple Developer Documentation",
+      "type": "text/plain"
+    }
+  }
+}

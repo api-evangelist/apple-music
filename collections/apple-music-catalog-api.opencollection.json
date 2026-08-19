@@ -1,0 +1,268 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Apple Music Catalog API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Catalog",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a catalog song by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.music.apple.com/v1/catalog/:storefront/songs/:id",
+            "params": [
+              {
+                "name": "storefront",
+                "value": "",
+                "type": "path",
+                "description": "Apple Music storefront identifier (e.g. us, gb, jp)"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a catalog song by id"
+        },
+        {
+          "info": {
+            "name": "Get catalog songs by ids",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.music.apple.com/v1/catalog/:storefront/songs",
+            "params": [
+              {
+                "name": "storefront",
+                "value": "",
+                "type": "path",
+                "description": "Apple Music storefront identifier (e.g. us, gb, jp)"
+              },
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of resource ids"
+              }
+            ]
+          },
+          "docs": "Get catalog songs by ids"
+        },
+        {
+          "info": {
+            "name": "Get a catalog album by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.music.apple.com/v1/catalog/:storefront/albums/:id",
+            "params": [
+              {
+                "name": "storefront",
+                "value": "",
+                "type": "path",
+                "description": "Apple Music storefront identifier (e.g. us, gb, jp)"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a catalog album by id"
+        },
+        {
+          "info": {
+            "name": "Get catalog albums by ids",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.music.apple.com/v1/catalog/:storefront/albums",
+            "params": [
+              {
+                "name": "storefront",
+                "value": "",
+                "type": "path",
+                "description": "Apple Music storefront identifier (e.g. us, gb, jp)"
+              },
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of resource ids"
+              }
+            ]
+          },
+          "docs": "Get catalog albums by ids"
+        },
+        {
+          "info": {
+            "name": "Get a catalog artist by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.music.apple.com/v1/catalog/:storefront/artists/:id",
+            "params": [
+              {
+                "name": "storefront",
+                "value": "",
+                "type": "path",
+                "description": "Apple Music storefront identifier (e.g. us, gb, jp)"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a catalog artist by id"
+        },
+        {
+          "info": {
+            "name": "Get catalog artists by ids",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.music.apple.com/v1/catalog/:storefront/artists",
+            "params": [
+              {
+                "name": "storefront",
+                "value": "",
+                "type": "path",
+                "description": "Apple Music storefront identifier (e.g. us, gb, jp)"
+              },
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of resource ids"
+              }
+            ]
+          },
+          "docs": "Get catalog artists by ids"
+        },
+        {
+          "info": {
+            "name": "Get a catalog playlist by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.music.apple.com/v1/catalog/:storefront/playlists/:id",
+            "params": [
+              {
+                "name": "storefront",
+                "value": "",
+                "type": "path",
+                "description": "Apple Music storefront identifier (e.g. us, gb, jp)"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a catalog playlist by id"
+        },
+        {
+          "info": {
+            "name": "Get catalog playlists by ids",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.music.apple.com/v1/catalog/:storefront/playlists",
+            "params": [
+              {
+                "name": "storefront",
+                "value": "",
+                "type": "path",
+                "description": "Apple Music storefront identifier (e.g. us, gb, jp)"
+              },
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of resource ids"
+              }
+            ]
+          },
+          "docs": "Get catalog playlists by ids"
+        },
+        {
+          "info": {
+            "name": "Get a catalog music video by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.music.apple.com/v1/catalog/:storefront/music-videos/:id",
+            "params": [
+              {
+                "name": "storefront",
+                "value": "",
+                "type": "path",
+                "description": "Apple Music storefront identifier (e.g. us, gb, jp)"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a catalog music video by id"
+        },
+        {
+          "info": {
+            "name": "Get a catalog station by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.music.apple.com/v1/catalog/:storefront/stations/:id",
+            "params": [
+              {
+                "name": "storefront",
+                "value": "",
+                "type": "path",
+                "description": "Apple Music storefront identifier (e.g. us, gb, jp)"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a catalog station by id"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
