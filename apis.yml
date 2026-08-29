@@ -117,6 +117,9 @@ apis:
   - type: OpenAPI
     url: openapi/apple-music-storefronts-api-openapi.yml
 common:
+- type: CapabilityMap
+  url: capabilities/apple-music-capability-edges.yml
+  name: Apple Music Business Capability Map
 - type: AgenticAccess
   url: agentic-access/apple-music-agentic-access.yml
 - type: VulnerabilityDisclosure

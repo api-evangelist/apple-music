@@ -1,0 +1,27 @@
+slug: apple-music
+provider: Apple Music
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Media, Entertainment & Telecom Content
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Catalog
+  spec_file: apple-music-catalog-api-openapi.yml
+  capability_id: BC-3710.20
+  capability_id_l1: BC-3710
+  capability_name: Metadata Cataloguing
+  confidence: 0.7
+  evidence: GET /catalog/{storefront}/songs/{id} Get a catalog song by id; GET /catalog/{storefront}/albums,
+    artists, playlists, music-videos, stations
+  reason: Read access to the Apple Music content catalogue metadata (songs, albums, artists, videos) —
+    this is media catalogue/metadata exposure. Could also be read as on-demand catalogue curation (BC-3730.30),
+    but the operations are pure metadata retrieval by identifier, so metadata cataloguing is the closer
+    fit. Confidence moderated by that ambiguity.
