@@ -113,6 +113,8 @@ apis:
   humanURL: https://developer.apple.com/documentation/applemusicapi
   baseURL: https://api.music.apple.com/v1
   tags:
+  - Storefront
+  tags_raw:
   - Storefronts
   properties:
   - type: OpenAPI
