@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Apple Music Catalog Library API
+  title: Apple Music Library API
   version: '1.0'
   description: 'REST API for the Apple Music catalog and the authenticated user''s library.
 
@@ -10,9 +10,7 @@ info:
 
     Authorization header. User-library endpoints additionally require a
 
-    Music User Token in the Music-User-Token header.
-
-    '
+    Music User Token in the Music-User-Token header.'
   contact:
     name: Apple Developer Documentation
     url: https://developer.apple.com/documentation/applemusicapi
@@ -36,6 +34,8 @@ paths:
       security:
       - DeveloperToken: []
         MusicUserToken: []
+      operationId: getMeLibrarySongs
+      x-operation-id-source: derived
   /me/library/albums:
     get:
       tags:
@@ -47,6 +47,8 @@ paths:
       security:
       - DeveloperToken: []
         MusicUserToken: []
+      operationId: getMeLibraryAlbums
+      x-operation-id-source: derived
   /me/library/artists:
     get:
       tags:
@@ -58,6 +60,8 @@ paths:
       security:
       - DeveloperToken: []
         MusicUserToken: []
+      operationId: getMeLibraryArtists
+      x-operation-id-source: derived
   /me/library/playlists:
     get:
       tags:
@@ -69,6 +73,8 @@ paths:
       security:
       - DeveloperToken: []
         MusicUserToken: []
+      operationId: getMeLibraryPlaylists
+      x-operation-id-source: derived
     post:
       tags:
       - Library
@@ -79,6 +85,8 @@ paths:
       security:
       - DeveloperToken: []
         MusicUserToken: []
+      operationId: postMeLibraryPlaylists
+      x-operation-id-source: derived
   /me/library/search:
     get:
       tags:
@@ -100,6 +108,8 @@ paths:
       security:
       - DeveloperToken: []
         MusicUserToken: []
+      operationId: getMeLibrarySearch
+      x-operation-id-source: derived
   /me/recommendations:
     get:
       tags:
@@ -111,6 +121,8 @@ paths:
       security:
       - DeveloperToken: []
         MusicUserToken: []
+      operationId: getMeRecommendations
+      x-operation-id-source: derived
   /me/recent/played:
     get:
       tags:
@@ -122,6 +134,8 @@ paths:
       security:
       - DeveloperToken: []
         MusicUserToken: []
+      operationId: getMeRecentPlayed
+      x-operation-id-source: derived
 components:
   securitySchemes:
     DeveloperToken:
