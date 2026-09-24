@@ -41,6 +41,7 @@ tags:
 - MusicKit
 - Catalog
 - Library
+- Audio
 created: '2026-05-08'
 modified: '2026-05-30'
 specificationVersion: '0.23'
@@ -65,8 +66,6 @@ apis:
     url: https://developer.apple.com/documentation/applemusicapi/getting_keys_and_creating_tokens
   - type: SDKs
     url: https://developer.apple.com/musickit/
-  - url: graphql/apple-music-graphql.md
-    type: GraphQL
 - aid: apple-music:apple-music-catalog-api
   name: Apple Music Catalog API
   description: Apple Music catalog resources
