@@ -155,10 +155,11 @@ paths:
       x-operation-id-source: derived
 components:
   parameters:
-    Id:
-      name: id
-      in: path
+    Ids:
+      name: ids
+      in: query
       required: true
+      description: Comma-separated list of resource ids
       schema:
         type: string
     Storefront:
@@ -168,11 +169,10 @@ components:
       description: Apple Music storefront identifier (e.g. us, gb, jp)
       schema:
         type: string
-    Ids:
-      name: ids
-      in: query
+    Id:
+      name: id
+      in: path
       required: true
-      description: Comma-separated list of resource ids
       schema:
         type: string
   securitySchemes:
