@@ -1,4 +1,4 @@
-# Apple Music (apple-music)
+# Apple Music
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,57 +66,129 @@
 
 Apple Music is Apple's streaming music service. The Apple Music API and MusicKit framework give developers access to the Apple Music catalog, user library, charts, recommendations, search, and playback control. Authentication is via Apple Developer Program JWT tokens; user library access requires a MusicKit Music User Token.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/apple-music/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/apple-music/refs/heads/main/apis.yml)
+**Areas:** Music · Streaming · Apple · MusicKit · Catalog · Library · Audio
 
-## Tags
+## Apple Music on APIs.io
 
-- Music
-- Streaming
-- Apple
-- MusicKit
-- Catalog
-- Library
+Everything profiled for Apple Music is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/apple-music/](https://apis.io/providers/apple-music/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (6)
 
-- **Created:** 2026-05-08
-- **Modified:** 2026-05-30
+- [Apple Music API](https://apis.io/apis/apple-music/catalog-library/) — REST API for Apple Music: catalog (songs, albums, artists, music videos, playlists, stations), search, charts, recommendations, and the authenticated user's…
+- [Apple Music Catalog API](https://apis.io/apis/apple-music/apple-music-catalog-api/) — Apple Music catalog resources
+- [Apple Music Charts API](https://apis.io/apis/apple-music/apple-music-charts-api/) — The Charts API from Apple Music — 1 operation(s) for charts.
+- [Apple Music Library API](https://apis.io/apis/apple-music/apple-music-library-api/) — Authenticated user library resources
+- [Apple Music Search API](https://apis.io/apis/apple-music/apple-music-search-api/) — The Search API from Apple Music — 2 operation(s) for search.
+- [Apple Music Storefronts API](https://apis.io/apis/apple-music/apple-music-storefronts-api/) — The Storefronts API from Apple Music — 3 operation(s) for storefronts.
 
-## APIs
+### Published properties
 
-### Apple Music API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-REST API for Apple Music: catalog (songs, albums, artists, music videos, playlists, stations), search, charts, recommendations, and the authenticated user's library, playlists, and ratings.
+#### GraphQL (1)
 
-- **Human URL:** [https://developer.apple.com/documentation/applemusicapi](https://developer.apple.com/documentation/applemusicapi)
-- **Base URL:** `https://api.music.apple.com/v1`
+GraphQL schemas.
 
-#### Tags
+- [Moved to /providers/apple-music/](https://apis.io/graphqls/apple-music/apple-music-graphql/)
 
-- Catalog
-- Library
-- Search
-- Charts
-- Recommendations
+#### Agentic access (1)
 
-#### Properties
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- [Documentation](https://developer.apple.com/documentation/applemusicapi)
-- [Authentication](https://developer.apple.com/documentation/applemusicapi/getting_keys_and_creating_tokens)
-- [SDK](https://developer.apple.com/musickit/)
-- [Postman Collection](collections/apple-music.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/apple-music.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Apple Music Agentic Access](https://apis.io/agentic-access/apple-music/apple-music-agentic-access/)
 
-## Common Properties
+#### Collections (6)
+
+Postman and Open Collection request collections.
+
+- [Apple Music API](https://apis.io/collections/apple-music/open-apple-music/)
+- [Apple Music Catalog API](https://apis.io/collections/apple-music/open-apple-music-catalog-api/)
+- [Apple Music Catalog Charts API](https://apis.io/collections/apple-music/open-apple-music-charts-api/)
+- [Apple Music Catalog Library API](https://apis.io/collections/apple-music/open-apple-music-library-api/)
+- [Apple Music Catalog Search API](https://apis.io/collections/apple-music/open-apple-music-search-api/)
+- [Apple Music Catalog Storefronts API](https://apis.io/collections/apple-music/open-apple-music-storefronts-api/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Apple Music Authentication](https://apis.io/security/apple-music/apple-music-authentication/)
+- [Apple Music Domain Security](https://apis.io/security/apple-music/apple-music-domain-security/)
+- [Apple Music Vulnerability Disclosure](https://apis.io/security/apple-music/apple-music-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Apple Music Plans Pricing](https://apis.io/plans/apple-music/apple-music-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Apple Music Rate Limits](https://apis.io/rate-limits/apple-music/apple-music-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Apple Music Finops](https://apis.io/finops/apple-music/apple-music-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://developer.apple.com/apple-music/)
-- [Developer Portal](https://developer.apple.com/documentation/applemusicapi)
-- [Plans](plans/apple-music-plans-pricing.yml)
-- [Rate Limits](rate-limits/apple-music-rate-limits.yml)
-- [Fin Ops](finops/apple-music-finops.yml)
-- [Review](review.yml)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 26.5** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 45.3 |
+| Contract governance | 0.0 |
+| Operational transparency | 5.3 |
+| Developer ergonomics | 38.1 |
+| Access clarity | 5.3 |
+
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 17.6** — Education & Research
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/apple-music/](https://apis.io/providers/apple-music/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Apple Music: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/apple-music/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
